@@ -1,0 +1,12 @@
+RewriteEngine On
+
+# Ensure the requested filename isn't a directory
+RewriteCond %{REQUEST_FILENAME} !-d
+# Ensure the requested filename with .php extension exists
+RewriteCond %{REQUEST_FILENAME}.php -f
+# Rewrite the request to append .php
+RewriteRule ^(.*)$ $1.php [L]
+
+# If you also want to redirect example.com/index to just example.com/
+RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /index\.php\ HTTP/
+RewriteRule ^index\.php$ / [R=301,L]
